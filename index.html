@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PetShop - Agendamento</title>
+  <link rel="stylesheet" href="stylesPET.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Agendamento Banho & Tosa</h1>
+    <form id="agendamentoForm">
+      <label for="nome">Nome do Cliente:</label>
+      <input type="text" id="nome" required>
+
+      <!--<label for="telefone">Telefone (WhatsApp):</label>-->
+      <!--<input type="tel" id="telefone" required placeholder="ex: 11999999999">-->
+
+      <label for="pet">Nome do Pet:</label>
+      <input type="text" id="pet" required>
+
+      <label for="servico">Serviço:</label>
+      <select id="servico" required>
+        <option value="">Selecione</option>
+        <option value="Banho">Banho</option>
+        <option value="Tosa">Tosa</option>
+        <option value="Consulta">Consulta</option>
+      </select>
+
+      <!-- Tipo de Tosa (aparece apenas quando Tosa for selecionado) -->
+      <div id="tiposTosa" style="display: none;">
+        <label for="tipoTosa">Tipo de Tosa:</label>
+        <select id="tipoTosa">
+          <option value="">Selecione</option>
+          <option value="Baby">Baby</option>
+          <option value="Geral">Geral</option>
+          <option value="Trimming">Trimming</option>
+          <option value="Asiática">Asiática</option>
+          <option value="Higiênica">Higiênica</option>
+        </select>
+      </div>
+
+      <label for="data">Data:</label>
+      <input type="date" id="data" required>
+
+      <label for="hora">Hora:</label>
+      <input type="time" id="hora" required>
+
+      <label for="endereco">Endereço:</label>
+<input type="text" id="endereco" required>
+
+<label>
+  <input type="checkbox" id="taxiDog">
+  Solicitar Táxi Dog (R$ 5,00)
+</label>
+
+<div id="taxaTaxiDog" style="display: none; margin-top: 10px;">
+  <strong>Taxa adicional: R$ 5,00</strong>
+</div>
+
+
+      <button type="submit">Agendar e Enviar WhatsApp</button>
+    </form>
+  </div>
+
+  <script src="scriptECT.js"></script>
+</body>
+</html>

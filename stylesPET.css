@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  background: #1f1e1e;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  background: rgb(248, 130, 20);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #161616;
+}
+
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #070707;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  background-color: #7fff7400;
+  color: rgb(255, 253, 253);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #080808;
+}
+
+#tiposTosa {
+  margin-top: 15px;
+}
+
+#taxaTaxiDog {
+  color: #000;
+  background: #ffe082;
+  padding: 10px;
+  border-radius: 5px;
+}

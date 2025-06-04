@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const tiposTosaDiv = document.getElementById('tiposTosa');
   const tipoTosaSelect = document.getElementById('tipoTosa');
 
+  // Mostrar/esconder tipo de tosa
   servicoSelect.addEventListener('change', function () {
     if (servicoSelect.value === 'Tosa') {
       tiposTosaDiv.style.display = 'block';
@@ -10,13 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
       tiposTosaDiv.style.display = 'none';
       tipoTosaSelect.value = '';
     }
-  });
-
-  const taxiDogCheckbox = document.getElementById('taxiDog');
-  const taxaTaxiDogDiv = document.getElementById('taxaTaxiDog');
-
-  taxiDogCheckbox.addEventListener('change', function () {
-    taxaTaxiDogDiv.style.display = this.checked ? 'block' : 'none';
   });
 
   // Horários bloqueados manualmente (exemplo)
@@ -28,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const dataInput = document.getElementById('data');
   const horaSelect = document.getElementById('hora');
 
+  // Função para gerar horários de 30 em 30 minutos, das 08:00 às 18:00
   function gerarHorariosDisponiveis(dataSelecionada) {
     const horarios = [];
     const inicio = 8 * 60;
@@ -44,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return horarios.filter(h => !bloqueados.includes(h));
   }
 
+  // Quando a data muda, atualiza os horários disponíveis
   dataInput.addEventListener('change', function () {
     const dataSelecionada = dataInput.value;
     const horarios = gerarHorariosDisponiveis(dataSelecionada);
@@ -57,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Envio para o WhatsApp
   document.getElementById('agendamentoForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -68,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const hora = horaSelect.value;
     const endereco = document.getElementById('endereco').value;
     const porte = document.getElementById('porte').value;
-    const taxiDog = taxiDogCheckbox.checked;
 
     let mensagem = `Olá sou ${nome}, gostaria de agendamento para meu pet *${pet}*%0A`;
     mensagem += `Serviço: *${servico}*%0A`;
@@ -85,13 +81,12 @@ document.addEventListener('DOMContentLoaded', function () {
     mensagem += `- Hora: *${hora}*%0A`;
     mensagem += `- Endereço: *${endereco}*%0A`;
 
-    if (taxiDog) {
-      mensagem += `- Táxi Dog: *Solicitado* (R$ 5,00)%0A`;
-    }
-
     mensagem += `Poderia confirmar o agendamento?`;
 
     const whatsappURL = `https://wa.me/5561981962696?text=${mensagem}`;
     window.open(whatsappURL, '_blank');
   });
+
+  // Confirma que o script está carregando
+  console.log("Script carregado e funcionando.");
 });

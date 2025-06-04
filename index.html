@@ -26,6 +26,15 @@
         <option value="Tosa">Tosa</option>
         <option value="Consulta">Consulta</option>
       </select>
+      
+<!-- Porte do Pet (sempre visível) -->
+<label for="porte">Porte do Pet:</label>
+<select id="porte" required>
+  <option value="">Selecione</option>
+  <option value="Pequeno">Pequeno</option>
+  <option value="Médio">Médio</option>
+  <option value="Grande">Grande</option>
+</select>
 
       <!-- Tipo de Tosa (aparece apenas quando Tosa for selecionado) -->
       <div id="tiposTosa" style="display: none;">
@@ -39,7 +48,7 @@
           <option value="Higiênica">Higiênica</option>
         </select>
       </div>
-
+ <!-- porte do pet (aparece apenas quando Tosa for selecionado) -->
       <label for="data">Data:</label>
       <input type="date" id="data" required>
 

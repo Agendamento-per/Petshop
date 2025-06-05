@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const porte = document.getElementById('porte').value;
     const obs = document.getElementById('observacoes').value;
 
-    let mensagem = `Olá, sou ${nome}, gostaria de agendar para meu pet *${pet}*%0A`;
+    let mensagem = `Olá, sou ${nome}, gostaria de agendamento para meu pet *${pet}*%0A`;
     mensagem += `Serviço: *${servico}*%0A`;
 
     if (servico === 'Tosa' && tipoTosa) {

@@ -2,27 +2,22 @@ document.addEventListener('DOMContentLoaded', function () {
   const servicoSelect = document.getElementById('servico');
   const tiposTosaDiv = document.getElementById('tiposTosa');
   const tipoTosaSelect = document.getElementById('tipoTosa');
-
-  // Mostrar/esconder tipo de tosa
-  servicoSelect.addEventListener('change', function () {
-    if (servicoSelect.value === 'Tosa') {
-      tiposTosaDiv.style.display = 'block';
-    } else {
-      tiposTosaDiv.style.display = 'none';
-      tipoTosaSelect.value = '';
-    }
-  });
-
-  // Horários bloqueados manualmente (exemplo)
-  const horariosAgendados = {
-    '2025-06-05': ['09:00', '13:00'],
-    '2025-06-06': ['10:30', '14:00'],
-  };
-
   const dataInput = document.getElementById('data');
   const horaSelect = document.getElementById('hora');
 
-  // Função para gerar horários de 30 em 30 minutos, das 08:00 às 18:00
+  // Horários agendados (bloqueados)
+  const horariosAgendados = {
+    '2025-06-05': ['09:00', '13:00'],
+    '2025-06-06': ['10:30', '14:00']
+  };
+
+  // Mostra/esconde tipo de tosa
+  servicoSelect.addEventListener('change', function () {
+    tiposTosaDiv.style.display = (this.value === 'Tosa') ? 'block' : 'none';
+    if (this.value !== 'Tosa') tipoTosaSelect.value = '';
+  });
+
+  // Gera os horários disponíveis
   function gerarHorariosDisponiveis(dataSelecionada) {
     const horarios = [];
     const inicio = 8 * 60;
@@ -31,20 +26,21 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let min = inicio; min <= fim; min += 30) {
       const horas = String(Math.floor(min / 60)).padStart(2, '0');
       const minutos = String(min % 60).padStart(2, '0');
-      const horario = `${horas}:${minutos}`;
-      horarios.push(horario);
+      horarios.push(`${horas}:${minutos}`);
     }
 
     const bloqueados = horariosAgendados[dataSelecionada] || [];
     return horarios.filter(h => !bloqueados.includes(h));
   }
 
-  // Quando a data muda, atualiza os horários disponíveis
+  // Atualiza o select de horários
   dataInput.addEventListener('change', function () {
-    const dataSelecionada = dataInput.value;
-    const horarios = gerarHorariosDisponiveis(dataSelecionada);
+    let dataSelecionada = dataInput.value;
+    if (!dataSelecionada) return;
 
+    const horarios = gerarHorariosDisponiveis(dataSelecionada);
     horaSelect.innerHTML = '<option value="">Selecione</option>';
+
     horarios.forEach(horario => {
       const option = document.createElement('option');
       option.value = horario;
@@ -53,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // Envio para o WhatsApp
+  // Envia para o WhatsApp
   document.getElementById('agendamentoForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -65,8 +61,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const hora = horaSelect.value;
     const endereco = document.getElementById('endereco').value;
     const porte = document.getElementById('porte').value;
+    const obs = document.getElementById('observacoes').value;
 
-    let mensagem = `Olá sou ${nome}, gostaria de agendamento para meu pet *${pet}*%0A`;
+    let mensagem = `Olá, sou ${nome}, gostaria de agendar para meu pet *${pet}*%0A`;
     mensagem += `Serviço: *${servico}*%0A`;
 
     if (servico === 'Tosa' && tipoTosa) {
@@ -74,7 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (porte) {
-      mensagem += `- Porte do Pet: *${porte}*%0A`;
+      mensagem += `- Porte: *${porte}*%0A`;
+    }
+
+    if (obs) {
+      mensagem += `- Observações: ${obs}%0A`;
     }
 
     mensagem += `- Data: *${data}*%0A`;
@@ -87,6 +88,5 @@ document.addEventListener('DOMContentLoaded', function () {
     window.open(whatsappURL, '_blank');
   });
 
-  // Confirma que o script está carregando
-  console.log("Script carregado e funcionando.");
+  console.log("Script carregado com sucesso.");
 });

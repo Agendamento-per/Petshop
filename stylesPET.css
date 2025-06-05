@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #141414;
+  margin: 0;
+  padding: 20px;
+}
+
+.whatsapp-container {
+    max-width: 500px;
+    margin: 30px auto;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    background-color: #e5ddd5;
+    background-image: url('https://web.whatsapp.com/img/bg-chat-tile-light_a4be512e7195b6b733d9110b408f075d.png');
+}
+
+.header {
+    background-color: #075e54;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.header p {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.chat-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    max-width: 70%;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border-radius: 7.5px;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.received {
+    background-color: white;
+    align-self: flex-start;
+}
+
+.sent {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+}
+
+.form-container {
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.form-container input {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 21px;
+    margin-right: 10px;
+    outline: none;
+}
+
+.form-container button {
+    background-color: #075e54;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #128c7e;
+}
+
+.time {
+    font-size: 11px;
+    color: #666;
+    text-align: right;
+    margin-top: 3px;
+}
+
+.option-btn {
+    background-color: #25d366;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.option-btn:hover {
+    background-color: #128c7e;
+}
+
+.option-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.date-input {
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}

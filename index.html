@@ -13,9 +13,6 @@
       <label for="nome">Nome do Cliente:</label>
       <input type="text" id="nome" required>
 
-      <!--<label for="telefone">Telefone (WhatsApp):</label>-->
-      <!--<input type="tel" id="telefone" required placeholder="ex: 11999999999">-->
-
       <label for="pet">Nome do Pet:</label>
       <input type="text" id="pet" required>
 
@@ -27,8 +24,7 @@
         <option value="Consulta">Consulta</option>
       </select>
 
-      <!-- Tipo de Tosa (aparece apenas quando Tosa for selecionado) -->
-      <div id="tiposTosa" style="display: none;">
+      <div id="tiposTosa">
         <label for="tipoTosa">Tipo de Tosa:</label>
         <select id="tipoTosa">
           <option value="">Selecione</option>
@@ -40,47 +36,32 @@
         </select>
       </div>
 
-<label for="nome">Observações tosa:</label>
-<input type="text" id="Observações" required>
+      <label for="observacoes">Observações:</label>
+      <input type="text" id="observacoes">
 
-<!-- Porte do Pet (sempre visível) -->
-<label for="porte">Porte do Pet:</label>
-<select id="porte" required>
-  <option value="">Selecione</option>
-  <option value="Pequeno">Pequeno</option>
-  <option value="Médio">Médio</option>
-  <option value="Grande">Grande</option>
-</select>
+      <label for="porte">Porte do Pet:</label>
+      <select id="porte" required>
+        <option value="">Selecione</option>
+        <option value="Pequeno">Pequeno</option>
+        <option value="Médio">Médio</option>
+        <option value="Grande">Grande</option>
+      </select>
 
-      
-
- <!-- porte do pet (aparece apenas quando Tosa for selecionado) -->
       <label for="data">Data:</label>
       <input type="date" id="data" required>
 
-     <label for="hora">Hora:</label>
-<select id="hora" required>
-  <option value="">Selecione</option>
-</select>
-
+      <label for="hora">Hora:</label>
+      <select id="hora" required>
+        <option value="">Selecione</option>
+      </select>
 
       <label for="endereco">Endereço:</label>
-<input type="text" id="endereco" required>
-
-<!--<label>
-  <input type="checkbox" id="taxiDog">
-  Solicitar Táxi Dog (R$ 5,00)
-</label>
-
-<div id="taxaTaxiDog" style="display: none; margin-top: 10px;">
-  <strong>Taxa adicional: R$ 5,00</strong>-->
-</div>
-
+      <input type="text" id="endereco" required>
 
       <button type="submit">Agendar e Enviar WhatsApp</button>
     </form>
   </div>
 
-  <script src="scriptECT.js"></script>
+  <script src="scriptPET.js" defer></script>
 </body>
 </html>

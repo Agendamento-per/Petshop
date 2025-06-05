@@ -40,11 +40,10 @@ const steps = [
 const orderData = {};
 let currentStep = -1;
 
-// 🐾 Mensagem inicial de boas-vindas
+// Mensagem inicial
 addMessage("🐾 Bem-vindo ao Pet Mundo dos Pets!", true);
 addMessage("Olá! Vamos agendar seu serviço.", true);
 
-// ⏳ Pequena pausa e começa a primeira pergunta
 setTimeout(() => {
     processChoice('');
 }, 500);
@@ -98,7 +97,7 @@ function addDateInput(question) {
     const dateInput = messageDiv.querySelector('#dateInput');
     dateInput.addEventListener('change', () => {
         const value = dateInput.value;
-        if (value) {
+        if (value && value !== "") {
             addMessage(value, false);
             processChoice(value);
             dateInput.disabled = true;
@@ -133,7 +132,7 @@ function processChoice(input) {
             if (step.isFinal) {
                 setTimeout(() => {
                     const mensagem = 
-`Olá, meu nome é *${orderData.cliente}*, gostaria de agendamento para meu pet *${orderData.pet}*\n` +
+`Olá, meu nome é *${orderData.cliente}*, gostaria de agendar para meu pet *${orderData.pet}*\n` +
 `- Serviço: *${orderData.servico}*\n` +
 (orderData.servico === "Tosa" ? `- Tipo de Tosa: *${orderData.tipoTosa}*\n` : '') +
 `- Porte: *${orderData.porte}*\n` +
@@ -147,7 +146,7 @@ function processChoice(input) {
                     addMessage(mensagem.replace(/%0A/g, '\n'), true);
                     addMessage("Seu pedido foi enviado para o WhatsApp!", true);
 
-                    const whatsappURL = `https://wa.me/5561981962696?text=${encodeURIComponent(mensagem)}`;
+                    const whatsappURL = `https://api.whatsapp.com/send?phone=5561981962696&text=${encodeURIComponent(mensagem)}`;
                     window.open(whatsappURL, '_blank');
 
                     userInput.disabled = true;

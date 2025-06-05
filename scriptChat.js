@@ -25,7 +25,7 @@ const steps = [
         conditional: (data) => data.servico === "Tosa" 
     },
     { question: "Qual o porte do pet?", field: "porte", options: ["Pequeno", "Médio", "Grande"] },
-    { question: "Qual a data do serviço? (Ex.: 05/07/2025)", field: "data" },
+    { question: "Selecione a data do serviço:", field: "data", type: "date" },
     { question: "Selecione o horário desejado:", field: "hora", options: gerarHorarios() },
     { question: "Informe o endereço para atendimento:", field: "endereco" },
     { question: "Deseja adicionar alguma observação?", field: "querObservacao", options: ["Sim", "Não"] },

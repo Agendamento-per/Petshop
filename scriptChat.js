@@ -146,10 +146,11 @@ function processChoice(input) {
                     addMessage(mensagem.replace(/%0A/g, '\n'), true);
                     addMessage("Seu pedido foi enviado para o WhatsApp!", true);
 
-                    const whatsappURL = `https://api.whatsapp.com/send?phone=5561981962696&text=${encodeURIComponent(mensagem)}`;
+                    const whatsappURL = `https://wa.me/5561981962696?text=${mensagem}`;
                     addMessage("✅ Seu pedido foi enviado para o WhatsApp!", true);
                     window.location.href = whatsappURL;
 
+    
                     userInput.disabled = true;
 sendButton.disabled = true;
 userInput.placeholder = "Conversa encerrada";

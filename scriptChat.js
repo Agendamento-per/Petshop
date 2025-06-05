@@ -25,7 +25,7 @@ const steps = [
         conditional: (data) => data.servico === "Tosa" 
     },
     { question: "Qual o porte do pet?", field: "porte", options: ["Pequeno", "Médio", "Grande"] },
-    { question: "Selecione a data do serviço:", field: "data", type: "date" },
+    { question: "Qual a data do serviço? (Ex.: 05/07/2025)", field: "data" },
     { question: "Selecione o horário desejado:", field: "hora", options: gerarHorarios() },
     { question: "Informe o endereço para atendimento:", field: "endereco" },
     { question: "Deseja adicionar alguma observação?", field: "querObservacao", options: ["Sim", "Não"] },
@@ -147,11 +147,13 @@ function processChoice(input) {
                     addMessage("Seu pedido foi enviado para o WhatsApp!", true);
 
                     const whatsappURL = `https://api.whatsapp.com/send?phone=5561981962696&text=${encodeURIComponent(mensagem)}`;
-                    window.open(whatsappURL, '_blank');
+                    addMessage("✅ Seu pedido foi enviado para o WhatsApp!", true);
+                    window.location.href = whatsappURL;
 
                     userInput.disabled = true;
-                    sendButton.disabled = true;
-                    userInput.placeholder = "Conversa encerrada";
+sendButton.disabled = true;
+userInput.placeholder = "Conversa encerrada";
+window.location.href = whatsappURL;
                 }, 1000);
             }
         }, 500);

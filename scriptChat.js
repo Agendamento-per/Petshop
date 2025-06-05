@@ -86,24 +86,34 @@ function addMessageWithOptions(text, options) {
 function addDateInput(question) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message received';
-    const time = `<div class="time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>`;
+    const time = `<div class="time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>`;
 
-    const inputHTML = `<input type="date" id="dateInput" class="date-input">`;
+    const inputHTML = `
+        <input type="date" id="dateInput" class="date-input">
+        <button class="confirm-date-btn">Confirmar</button>
+    `;
 
     messageDiv.innerHTML = `${question}<br>${inputHTML}${time}`;
     chat.appendChild(messageDiv);
     chat.scrollTop = chat.scrollHeight;
 
     const dateInput = messageDiv.querySelector('#dateInput');
-    dateInput.addEventListener('change', () => {
+    const confirmButton = messageDiv.querySelector('.confirm-date-btn');
+
+    confirmButton.addEventListener('click', () => {
         const value = dateInput.value;
-        if (value && value !== "") {
-            addMessage(value, false);
-            processChoice(value);
+        if (value) {
+            const dataFormatada = value.split('-').reverse().join('/'); // Formato DD/MM/AAAA
+            addMessage(dataFormatada, false);
+            processChoice(dataFormatada);
             dateInput.disabled = true;
+            confirmButton.disabled = true;
+        } else {
+            alert("Por favor, selecione uma data antes de confirmar.");
         }
     });
 }
+
 
 function processChoice(input) {
     if (currentStep >= 0 && currentStep < steps.length && steps[currentStep].field) {

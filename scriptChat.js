@@ -2,18 +2,22 @@ const chat = document.getElementById('chat');
 const userInput = document.getElementById('userInput');
 const sendButton = document.getElementById('sendButton');
 
+// Gera a lista de horários de 30 em 30 minutos
 function gerarHorarios() {
     const horarios = [];
     const inicio = 8 * 60;
     const fim = 17 * 60 + 30;
+    
     for (let min = inicio; min <= fim; min += 30) {
         const h = String(Math.floor(min / 60)).padStart(2, '0');
         const m = String(min % 60).padStart(2, '0');
         horarios.push(`${h}:${m}`);
     }
+
     return horarios;
 }
 
+// Etapas da conversa
 const steps = [
     { question: "Qual seu nome?", field: "cliente" },
     { question: "Qual o nome do seu pet?", field: "pet" },
@@ -40,7 +44,7 @@ const steps = [
 const orderData = {};
 let currentStep = -1;
 
-// Mensagem inicial
+// Mensagens iniciais
 addMessage("🐾 Bem-vindo ao Pet Mundo dos Pets!", true);
 addMessage("Olá! Vamos agendar seu serviço.", true);
 
@@ -48,24 +52,25 @@ setTimeout(() => {
     processChoice('');
 }, 500);
 
+// Função para adicionar mensagens
 function addMessage(text, isReceived) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isReceived ? 'received' : 'sent'}`;
     messageDiv.innerHTML = `
         ${text}
-        <div class="time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+        <div class="time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
     `;
     chat.appendChild(messageDiv);
     chat.scrollTop = chat.scrollHeight;
 }
 
+// Opções em forma de botões
 function addMessageWithOptions(text, options) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message received';
-    const time = `<div class="time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>`;
+    const time = `<div class="time">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>`;
 
     const buttonsHTML = options.map(opt => `<button class="option-btn">${opt}</button>`).join(' ');
-
     messageDiv.innerHTML = `${text}<br>${buttonsHTML}${time}`;
     chat.appendChild(messageDiv);
     chat.scrollTop = chat.scrollHeight;
@@ -76,13 +81,12 @@ function addMessageWithOptions(text, options) {
             const choice = btn.textContent;
             addMessage(choice, false);
             buttons.forEach(b => b.disabled = true);
-            setTimeout(() => {
-                processChoice(choice);
-            }, 500);
+            setTimeout(() => processChoice(choice), 500);
         });
     });
 }
 
+// Input para selecionar data
 function addDateInput(question) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message received';
@@ -103,7 +107,7 @@ function addDateInput(question) {
     confirmButton.addEventListener('click', () => {
         const value = dateInput.value;
         if (value) {
-            const dataFormatada = value.split('-').reverse().join('/'); // Formato DD/MM/AAAA
+            const dataFormatada = value.split('-').reverse().join('/');
             addMessage(dataFormatada, false);
             processChoice(dataFormatada);
             dateInput.disabled = true;
@@ -114,7 +118,7 @@ function addDateInput(question) {
     });
 }
 
-
+// Processa a escolha do usuário
 function processChoice(input) {
     if (currentStep >= 0 && currentStep < steps.length && steps[currentStep].field) {
         orderData[steps[currentStep].field] = input;
@@ -130,6 +134,7 @@ function processChoice(input) {
 
     if (currentStep < steps.length) {
         const step = steps[currentStep];
+
         setTimeout(() => {
             if (step.type === "date") {
                 addDateInput(step.question);
@@ -141,7 +146,7 @@ function processChoice(input) {
 
             if (step.isFinal) {
                 setTimeout(() => {
-                    const mensagem = 
+                    const mensagem =
 `Olá, meu nome é *${orderData.cliente}*, gostaria de agendar para meu pet *${orderData.pet}*\n` +
 `- Serviço: *${orderData.servico}*\n` +
 (orderData.servico === "Tosa" ? `- Tipo de Tosa: *${orderData.tipoTosa}*\n` : '') +
@@ -154,23 +159,21 @@ function processChoice(input) {
 
                     addMessage("Resumo do Pedido:", true);
                     addMessage(mensagem.replace(/%0A/g, '\n'), true);
-                    addMessage("Seu pedido foi enviado para o WhatsApp!", true);
-
-                    const whatsappURL = `https://wa.me/5561981962696?text=${mensagem}`;
                     addMessage("✅ Seu pedido foi enviado para o WhatsApp!", true);
-                    window.location.href = whatsappURL;
 
-    
+                    const whatsappURL = `https://wa.me/5561981962696?text=${encodeURIComponent(mensagem)}`;
+                    
                     userInput.disabled = true;
-sendButton.disabled = true;
-userInput.placeholder = "Conversa encerrada";
-window.location.href = whatsappURL;
+                    sendButton.disabled = true;
+                    userInput.placeholder = "Conversa encerrada";
+                    window.location.href = whatsappURL;
                 }, 1000);
             }
         }, 500);
     }
 }
 
+// Processa o texto enviado pelo usuário
 function processUserInput() {
     const input = userInput.value.trim();
     if (!input) return;
@@ -180,6 +183,7 @@ function processUserInput() {
     processChoice(input);
 }
 
+// Listeners
 sendButton.addEventListener('click', processUserInput);
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {

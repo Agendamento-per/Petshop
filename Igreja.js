@@ -155,6 +155,15 @@ function gerarCarteira() {
 
   document.getElementById("modal").style.display = "flex";
 }
+// Exibe o QR Code e o modal
+qrCanvas.style.display = "block";
+document.getElementById("modal").style.display = "flex";
+
+// Scrolla suavemente até a carteira na tela
+document.getElementById("carteiraPreview").scrollIntoView({
+  behavior: "smooth",
+  block: "center"
+});
 
 function fecharModal() {
   document.getElementById("modal").style.display = "none";
